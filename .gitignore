@@ -31,11 +31,14 @@ src/environments/environment.*.ts
 # Miscellaneous
 npm-debug.log*
 yarn-error.log
+# Ignore node_modules
 node_modules/
 
 # Ignore environment files
 .env
 
-# Other files and folders you may want to ignore
+# Ignore log files
 *.log
-*.DS_Store
+
+# Ignore OS-specific files
+.DS_Store

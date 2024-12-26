@@ -1,0 +1,109 @@
+<form #signupForm="ngForm" (ngSubmit)="onSignup(signupForm)" novalidate>
+    <div>
+      <label for="username">Username:</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        [(ngModel)]="username"
+        #usernameInput="ngModel"
+        required
+      />
+      <!-- Display validation error for username -->
+      <div *ngIf="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)">
+        <div *ngIf="usernameInput.errors?.['required']" class="error-message">
+          Username is required.
+        </div>
+      </div>
+    </div>
+  
+    <div>
+      <label for="email">Email:</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        [(ngModel)]="email"
+        #emailInput="ngModel"
+        required
+        email
+      />
+      <!-- Display validation error for email -->
+      <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">
+        <div *ngIf="emailInput.errors?.['required']" class="error-message">
+          Email is required.
+        </div>
+        <div *ngIf="emailInput.errors?.['email']" class="error-message">
+          Please enter a valid email address.
+        </div>
+      </div>
+    </div>
+  
+    <div>
+      <label for="password">Password:</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        [(ngModel)]="password"
+        #passwordInput="ngModel"
+        required
+        minlength="6"
+      />
+      <!-- Display validation error for password -->
+      <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)">
+        <div *ngIf="passwordInput.errors?.['required']" class="error-message">
+          Password is required.
+        </div>
+        <div *ngIf="passwordInput.errors?.['minlength']" class="error-message">
+          Password must be at least 6 characters long.
+        </div>
+      </div>
+    </div>
+  
+    <button type="submit" [disabled]="signupForm.invalid">Sign Up</button>
+    <button (click)="navigateToLogin()">Login</button>
+    
+    <div *ngIf="signupForm.invalid && (signupForm.dirty || signupForm.touched)" class="error-message">
+      Please fill out all fields correctly before submitting.
+    </div>
+  </form>
+  
+  <!-- OTP Section: Display after the signup form is submitted -->
+  <div *ngIf="otpSent">
+    <form (ngSubmit)="onVerifyOtp()">
+      <label for="otp">Enter OTP:</label>
+      <input
+        type="text"
+        id="otp"
+        name="otp"
+        [(ngModel)]="otp"
+        #otpInput="ngModel"
+        required
+        maxlength="6"
+      />
+      <!-- Display validation error for OTP -->
+      <div *ngIf="otpInput.invalid && (otpInput.dirty || otpInput.touched)">
+        <div *ngIf="otpInput.errors?.['required']" class="error-message">
+          OTP is required.
+        </div>
+        <div *ngIf="otpInput.errors?.['maxlength']" class="error-message">
+          OTP must be exactly 6 characters.
+        </div>
+      </div>
+  
+      <button type="submit" [disabled]="otpInput.invalid">Verify OTP</button>
+    </form>
+  </div>
+  
+  <!-- Optionally display a message when the OTP verification fails -->
+  <div *ngIf="otpError" class="error-message">
+    Invalid OTP. Please try again.
+  </div>
+  
+  <!-- Optionally display submitted data -->
+  <div *ngIf="submittedData">
+    <h3>Submitted Data:</h3>
+    <pre>{{ submittedData | json }}</pre>
+  </div>
+  
