@@ -1,11 +1,10 @@
-<div class="dashboard">
-  <h1>{{ title }}</h1>
-  <p>{{ description }}</p>
-  <button (click)="navigateToSignup()">Logout</button>
-  <button (click)="navigateTouser()">User</button>
-  <button (click)="navigateToevent()">Events</button>
-  <button (click)="navigateToinsevent()">InsertEvents</button>
-  <button (click)="navigateTocontact()">Contactus</button>
-  <button (click)="navigateTogallery()">Gallery</button>
-</div>
-<div><router-outlet></router-outlet></div>
+<!-- app.component.html -->
+<nav>
+  <a routerLink="/login">Login</a>
+  <a routerLink="/signup">Signup</a>
+  <a routeLink="/dashboard">Dashboard</a>
+  
+</nav>
+
+<!-- This is where routed components will be displayed -->
+<router-outlet> </router-outlet>
